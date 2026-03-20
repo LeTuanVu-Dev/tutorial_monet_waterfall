@@ -261,49 +261,35 @@
 <section id="abtest">
 <h2>5. A/B Test Setup</h2>
 
-<p>Tự động thiết lập A/B Test cho mediation với 2 cases:</p>
+<p>Flow mới: Setup Mediation (giống chức năng Setup Mediation) đến xong Bidding + Waterfall → Save → Set up A/B Test → Map variant B từ sheet → Auto: Start Test | Manual: Save.</p>
 
 <div class="alert alert-info">
-  <strong>Điều kiện cần có trước khi chạy:</strong>
+  <strong>Yêu cầu trước khi chạy:</strong>
   <ul style="margin:8px 0 0 16px;">
-    <li><strong>Tên Ứng dụng</strong> trong tab Cấu hình phải khớp chính xác với tên app trên AdMob</li>
-    <li>Đã đăng nhập AdMob trong Chrome (đúng tài khoản có app cần setup)</li>
-    <li>Có quyền truy cập Mediation groups của app</li>
-    <li>Nên mở sẵn tab Mediation trên AdMob để tool quét nhanh hơn</li>
+    <li><strong>Tải dữ liệu Google Sheet</strong> và <strong>Setup AdUnit</strong> xong</li>
+    <li>Tên Ứng dụng trong tab Cấu hình khớp với tên app trên AdMob</li>
+    <li>Đã đăng nhập AdMob trong Chrome</li>
   </ul>
 </div>
 
-<h3>Case 1: Mediation mới (chưa có setup)</h3>
+<h3>Chế độ:</h3>
 <ul>
-  <li>Waterfall chưa có dữ liệu</li>
-  <li>Variant A = Giữ nguyên eCPM mới</li>
-  <li>Variant B = Remove all (baseline)</li>
-</ul>
-
-<h3>Case 2: Mediation đã có sẵn setup</h3>
-<ul>
-  <li>Waterfall đã có dữ liệu</li>
-  <li>Bước 1: Pause setup mới</li>
-  <li>Bước 2: Tạo A/B Test với Variant B = remove setup cũ</li>
+  <li><strong>Auto AB Test:</strong> Tool tự động Start Test sau khi map variant B, chuyển sang mediation group tiếp theo</li>
+  <li><strong>Manual AB Test:</strong> Tool bấm Save, user tự Start Test sau, chuyển sang mediation group tiếp theo</li>
 </ul>
 
 <h3>Cách sử dụng:</h3>
 <ol>
-  <li><strong>Bước chuẩn bị:</strong> Vào tab Cấu hình → nhập <strong>Tên Ứng dụng</strong> (App name trên AdMob). Tool dùng tên này để filter và quét mediation groups.</li>
-  <li>Click nút <strong>"A/B Test Setup"</strong> trong tab Tự động hóa</li>
-  <li>Tool sẽ: filter theo App → quét toàn bộ mediation groups → hiển thị dropdown</li>
-  <li>Chọn <strong>Mediation Group</strong> cần A/B Test từ dropdown</li>
-  <li>Tool tự động quét và phát hiện case (1 hoặc 2)</li>
-  <li>Xem thông tin case được phát hiện</li>
-  <li>Click <strong>"Bắt đầu A/B Test"</strong> để thực hiện</li>
+  <li>Tải dữ liệu từ Google Sheet (nút Fetch trong tab Cấu hình)</li>
+  <li>Chạy <strong>Setup AdUnit</strong> trước</li>
+  <li>Click nút <strong>"A/B Test"</strong> trong tab Tự động hóa</li>
+  <li>Chọn <strong>Auto AB Test</strong> hoặc <strong>Manual AB Test</strong></li>
+  <li>Click <strong>"Start Test"</strong> để bắt đầu</li>
+  <li>Tool sẽ: Setup Mediation (format, geo, ad units, bidding, waterfall) cho từng group → Save → Set up A/B Test → Map waterfall vào Variant B theo sheet → Auto: Start Test / Manual: Save → chuyển group tiếp theo</li>
 </ol>
 
-<div class="alert alert-info">
-  <strong>Lưu ý:</strong> Nếu dropdown hiển thị "Không tìm thấy mediation group" hoặc kẹt ở "Đang quét mediation groups", kiểm tra Tên Ứng dụng trong tab Cấu hình đã khớp chính xác với tên app trên AdMob chưa. Thử mở sẵn trang Mediation của app trên AdMob rồi chạy lại.
-</div>
-
 <div class="alert alert-success">
-  <strong>Tự động phát hiện:</strong> Tool sẽ tự quét waterfall để xác định Case 1 hay Case 2, không cần chọn thủ công.
+  <strong>Flow tích hợp:</strong> A/B Test chạy ngay sau Setup Mediation, không cần chạy riêng.
 </div>
 </section>
 
