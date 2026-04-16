@@ -26,6 +26,8 @@
     .alert { padding:12px 16px; border-radius:8px; margin:12px 0; font-size:.9rem; }
     .alert-info { background:#f0f9ff; border:1px solid #bae6fd; color:#0c4a6e; }
     .alert-success { background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
+    .alert-danger { background:#fef2f2; border:2px solid #dc2626; color:#7f1d1d; margin:16px 0; font-size:.95rem; line-height:1.65; }
+    .alert-danger strong { color:#b91c1c; }
     .alert a { color:#0369a1; font-weight:500; text-decoration:none; }
     .alert a:hover { text-decoration:underline; }
     code { background:#f1f5f9; padding:2px 6px; border-radius:4px; font-size:.88em; }
@@ -93,6 +95,12 @@
 
 <p>Chuyển sang tab <strong>"Cấu hình"</strong> để thiết lập trước khi chạy automation. Các field tự động lưu khi thay đổi.</p>
 
+<div class="alert alert-danger">
+  <strong>Lưu ý bắt buộc — chọn đúng ngữ cảnh mediation:</strong><br>
+  Trên tab <strong>Cấu hình</strong>, mọi thông tin (App ID, Tên ứng dụng, Link / Tên Sheet; khi dùng nhiều app thì <strong>Chọn App đã lưu</strong> + <strong>Tải App</strong>) phải <strong>trùng đúng app và đúng nhóm mediation</strong> mà bạn định Setup Mediation. Cột <strong>MediationGroup</strong> trong Google Sheet phải khớp tên nhóm mediation trên AdMob cho từng dòng.<br>
+  <strong style="color:#b91c1c;">Nếu chọn sai profile / sai sheet / sai tên nhóm mediation</strong> (ví dụ tải nhầm app đã lưu, sheet của app khác, hoặc tên group không khớp AdMob) → tool vẫn có thể chạy nhưng <strong>thường gây lỗi hoặc kẹt ở bước Bidding (Step 6)</strong> khi Setup Mediation, vì danh sách nguồn bidding và ngữ cảnh trang không khớp nhóm thật. <strong>Hãy kiểm tra kỹ trước khi bấm automation.</strong>
+</div>
+
 <table>
   <thead><tr><th>Trường</th><th>Mô tả</th></tr></thead>
   <tbody>
@@ -127,6 +135,10 @@
       <td>Tên app hiển thị trên AdMob. Phải khớp chính xác với tên trên AdMob.</td>
     </tr>
     <tr>
+      <td><strong>Nhóm mediation (Sheet + Cấu hình)</strong></td>
+      <td><span style="color:#b91c1c;font-weight:600;">Bắt buộc khớp ngữ cảnh:</span> các dòng trên Google Sheet phải có cột <strong>MediationGroup</strong> đúng tên nhóm trên AdMob; đồng thời App ID / Tên app / sheet đang dùng phải là của <strong>đúng ứng dụng</strong> đó. Khi dùng Multi-app: chọn đúng mục <strong>Chọn App đã lưu</strong> rồi <strong>Tải App</strong> trước khi Fetch và chạy Setup Mediation. <span style="color:#b91c1c;font-weight:600;">Chọn sai → dễ lỗi ở bước Bidding (Step 6).</span></td>
+    </tr>
+    <tr>
       <td><strong>Tài khoản Google (0, 1, 2...)</strong></td>
       <td>Xem hướng dẫn chi tiết bên dưới ↓</td>
     </tr>
@@ -144,7 +156,7 @@
     </tr>
     <tr>
       <td><strong>Bidding ad sources</strong></td>
-      <td>Tích checkbox bên trái mỗi nguồn bidding muốn thêm. Có thể dùng "Chọn tất cả (Select all)" để tick/bỏ tick tất cả. Để trống (không tick) = chọn tất cả Active khi Setup Mediation.</td>
+      <td>Tích checkbox bên trái mỗi nguồn bidding muốn thêm. Có thể dùng "Chọn tất cả (Select all)" để tick/bỏ tick tất cả. Để trống (không tick nguồn nào) = không thêm nguồn bidding khi Setup Mediation.</td>
     </tr>
     <tr>
       <td><strong>Ghi màn hình khi chạy</strong></td>
@@ -156,6 +168,11 @@
     </tr>
   </tbody>
 </table>
+
+<div class="alert alert-danger">
+  <strong>Không được đặt tên sheet trùng tên với StandardNames trong sheet.</strong><br>
+  Tên tab Google Sheets (ô <strong>Tên Sheet</strong> trong extension) không được trùng với bất kỳ giá trị nào trong cột <strong>StandardNames</strong> của dữ liệu — nếu trùng, tool có thể không hoạt động đúng khi tải sheet hoặc chọn ad unit.
+</div>
 
 <h3>Chuẩn bị Google Sheet</h3>
 <p>Sheet cần <strong>6 cột</strong> (A→F): Format, Placement, Price, StandardNames, MediationGroup, Countries. Dữ liệu từ hàng 2, hàng 1 là header.</p>
@@ -227,6 +244,7 @@
   <li>Click nút <strong>"Tải App"</strong> để tải thông tin app đã chọn</li>
   <li>Thông tin sẽ tự động điền vào các ô tương ứng</li>
 </ol>
+<p style="color:#b91c1c;font-weight:600;margin-top:12px;border-left:4px solid #dc2626;padding:10px 12px;background:#fef2f2;border-radius:6px;">Nếu chọn nhầm app ở đây mà vẫn chạy Setup Mediation, tool có thể mở sai ngữ cảnh và <strong>lỗi tại bước Bidding</strong>. Luôn xác nhận đúng app trước khi Fetch / chạy automation.</p>
 
 <h3>Quản lý app:</h3>
 <ul>
@@ -295,6 +313,6 @@
 
 </div>
 
-<footer>Monet Waterfall v1.0.0 — Hướng dẫn sử dụng</footer>
+<footer>Monet Waterfall v1.0.3 — Hướng dẫn sử dụng</footer>
 </body>
 </html>
