@@ -7,45 +7,68 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #4f46e5; --success: #059669; --text: #1e293b; --text-sec: #64748b;
+      --primary: #4f46e5; --success: #059669; --warning: #d97706; --danger: #dc2626; --info: #0284c7;
+      --mob: #6366f1; --mon: #10b981; --text: #1e293b; --text-sec: #64748b;
       --border: #e2e8f0; --bg: #f8fafc; --card: #fff;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); line-height:1.7; font-size:15px; }
+    body { font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); line-height:1.75; font-size:15px; }
     .hero { background:linear-gradient(135deg,#059669 0%,#047857 100%); color:#fff; padding:36px 0 28px; text-align:center; }
     .hero h1 { font-size:1.8rem; font-weight:700; }
-    .hero .sub { font-size:.95rem; opacity:.9; margin-top:6px; }
-    .container { max-width:720px; margin:0 auto; padding:32px 24px 60px; }
-    section { margin-bottom:36px; }
+    .hero .sub { font-size:.95rem; opacity:.9; margin-top:6px; max-width:560px; margin-left:auto; margin-right:auto; }
+    .version-pill { display:inline-block; margin-top:12px; padding:4px 12px; border-radius:999px; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); font-size:.8rem; font-weight:700; }
+    .container { max-width:760px; margin:0 auto; padding:32px 24px 60px; }
+    section { margin-bottom:40px; }
     h2 { font-size:1.35rem; font-weight:700; margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--success); }
-    h3 { font-size:1.05rem; font-weight:600; margin:20px 0 10px; }
+    h3 { font-size:1.05rem; font-weight:600; margin:22px 0 10px; }
+    h4 { font-size:.98rem; font-weight:600; margin:16px 0 8px; color:var(--text-sec); }
     p { margin-bottom:10px; }
-    ul { margin:0 0 10px 20px; }
-    li { margin-bottom:4px; }
+    ul, ol { margin:0 0 12px 22px; }
+    li { margin-bottom:6px; }
     .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px; margin:12px 0; }
-    .alert { padding:12px 16px; border-radius:8px; margin:12px 0; font-size:.9rem; }
+    .card-mob { border-left:4px solid var(--mob); }
+    .card-mon { border-left:4px solid var(--mon); }
+    .alert { padding:12px 16px; border-radius:8px; margin:12px 0; font-size:.92rem; }
     .alert-info { background:#f0f9ff; border:1px solid #bae6fd; color:#0c4a6e; }
     .alert-success { background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
-    .alert-danger { background:#fef2f2; border:2px solid #dc2626; color:#7f1d1d; margin:16px 0; font-size:.95rem; line-height:1.65; }
+    .alert-warning { background:#fffbeb; border:1px solid #fde68a; color:#92400e; }
+    .alert-danger { background:#fef2f2; border:2px solid #dc2626; color:#7f1d1d; margin:16px 0; font-size:.94rem; line-height:1.65; }
     .alert-danger strong { color:#b91c1c; }
     .alert a { color:#0369a1; font-weight:500; text-decoration:none; }
     .alert a:hover { text-decoration:underline; }
+    .release-card { background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:0 10px 25px rgba(15,23,42,.06); }
+    .release-title { display:flex; align-items:center; gap:10px; margin-bottom:12px; font-weight:700; flex-wrap:wrap; }
+    .version-chip { display:inline-block; padding:3px 10px; border-radius:999px; background:#dcfce7; color:#166534; font-size:.78rem; }
+    .update-grid { display:grid; gap:10px; }
+    .update-note { border-radius:10px; padding:12px 14px; border-left:5px solid; font-size:.92rem; }
+    .note-green { background:#ecfdf5; border-color:var(--success); }
+    .note-blue { background:#eff6ff; border-color:var(--info); }
+    .note-amber { background:#fffbeb; border-color:var(--warning); }
+    .note-purple { background:#f5f3ff; border-color:#7c3aed; }
     code { background:#f1f5f9; padding:2px 6px; border-radius:4px; font-size:.88em; }
     table { width:100%; border-collapse:collapse; margin:12px 0; font-size:.9rem; }
-    th,td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border); }
+    th,td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border); vertical-align:top; }
     th { background:#f8fafc; font-weight:600; color:var(--text-sec); font-size:.8rem; }
+    .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:.72rem; font-weight:700; margin-right:4px; }
+    .badge-mob { background:#eef2ff; color:#4338ca; }
+    .badge-mon { background:#ecfdf5; color:#047857; }
+    .step-list { counter-reset: step; list-style:none; padding:0; margin:12px 0; }
+    .step-list li { counter-increment: step; position:relative; padding:12px 12px 12px 48px; margin-bottom:8px; background:#fff; border:1px solid var(--border); border-radius:8px; }
+    .step-list li::before { content: counter(step); position:absolute; left:12px; top:12px; width:26px; height:26px; border-radius:50%; background:var(--success); color:#fff; font-weight:700; font-size:.85rem; display:flex; align-items:center; justify-content:center; }
     footer { text-align:center; padding:24px; color:var(--text-sec); font-size:.85rem; border-top:1px solid var(--border); }
     #toc ul { list-style:none; padding:0; }
     #toc li { margin:8px 0; }
     #toc a { color:var(--primary); text-decoration:none; font-weight:500; }
     #toc a:hover { text-decoration:underline; }
+    .flow-box { background:#f8fafc; border:1px dashed var(--border); border-radius:8px; padding:14px; font-size:.9rem; margin:10px 0; }
   </style>
 </head>
 <body>
 
 <div class="hero">
   <h1>Monet Waterfall</h1>
-  <div class="sub">Hướng dẫn sử dụng cho người dùng</div>
+  <div class="sub">Hướng dẫn sử dụng — viết cho người không chuyên kỹ thuật</div>
+  <div class="version-pill">Version 1.1.0</div>
 </div>
 
 <div class="container">
@@ -54,23 +77,110 @@
 <section id="toc">
 <h2>Mục lục</h2>
 <ul>
+  <li><a href="#intro">Giới thiệu nhanh</a></li>
+  <li><a href="#updates">Cập nhật v1.1.0</a></li>
+  <li><a href="#open">Mở extension &amp; chuẩn bị</a></li>
   <li><a href="#login">1. Đăng nhập</a></li>
-  <li><a href="#config">2. Cấu hình</a></li>
-  <li><a href="#multi-app">3. Quản lý nhiều App</a></li>
-  <li><a href="#fallback">4. Map Fallback AdUnit</a></li>
-  <li><a href="#abtest">5. A/B Test Setup</a></li>
+  <li><a href="#ui">2. Giao diện tổng quan</a></li>
+  <li><a href="#auth">3. Cấu hình chung (Auth)</a></li>
+  <li><a href="#mobflow">4. MobFlow — Tạo Ad Unit</a></li>
+  <li><a href="#monet-mediation">5. Monet — Mediation &amp; Waterfall</a></li>
+  <li><a href="#biddings">6. Setup Biddings</a></li>
+  <li><a href="#multi-app">7. Quản lý nhiều App</a></li>
+  <li><a href="#logs">8. Tab Logs &amp; xử lý lỗi</a></li>
+  <li><a href="#tips">9. Mẹo quan trọng</a></li>
 </ul>
 </section>
 
-<!-- ═══════════ 1. ĐĂNG NHẬP (LICENSE KEY) ═══════════ -->
+<!-- ═══════════ GIỚI THIỆU ═══════════ -->
+<section id="intro">
+<h2>Giới thiệu nhanh</h2>
+<p><strong>Monet Waterfall</strong> là extension Chrome giúp bạn tự động thao tác trên Google AdMob thay vì làm tay từng bước. Extension gồm <strong>2 bộ công cụ</strong> trong cùng một giao diện:</p>
+
+<div class="card card-mob">
+  <h3 style="margin-top:0;"><span class="badge badge-mob">MobFlow</span> Tạo &amp; quản lý Ad Unit</h3>
+  <ul>
+    <li><strong>Setup Ad Unit</strong> — tạo ad unit trên AdMob theo Google Sheet, có thể ghi Ad ID ngược lại Sheet.</li>
+    <li><strong>Setup Manual</strong> — chỉnh giá sàn (eCPM floor) theo từng quốc gia cho ad unit đã có.</li>
+  </ul>
+</div>
+
+<div class="card card-mon">
+  <h3 style="margin-top:0;"><span class="badge badge-mon">Monet</span> Mediation, Waterfall &amp; A/B Test</h3>
+  <ul>
+    <li><strong>Setup AdUnit</strong> — tạo ad unit + map waterfall (theo Sheet riêng của Monet).</li>
+    <li><strong>Setup Mediation</strong> — tạo/sửa nhóm mediation, bidding, waterfall.</li>
+    <li><strong>A/B Test</strong> — thiết lập thử nghiệm A/B trên mediation group.</li>
+    <li><strong>Setup Biddings</strong> — cấu hình nguồn bidding Meta, Mintegral, Pangle.</li>
+  </ul>
+</div>
+
+<div class="alert alert-info">
+  <strong>Bạn cần gì trước khi dùng?</strong><br>
+  • Tài khoản Google AdMob đã đăng nhập trên Chrome<br>
+  • Google Sheet chứa dữ liệu (Sheet phải <strong>chia sẻ công khai</strong> — ai có link đều xem được)<br>
+  • License Key do admin cấp<br>
+  • Mở trang AdMob (<code>admob.google.com</code>) rồi bấm icon extension
+</div>
+</section>
+
+<!-- ═══════════ CẬP NHẬT V1.1.0 ═══════════ -->
+<section id="updates">
+<h2>Cập nhật v1.1.0</h2>
+
+<div class="release-card">
+  <div class="release-title">
+    <span class="version-chip">v1.1.0</span>
+    <span>Gộp MobFlow + Monet trong một extension</span>
+  </div>
+  <div class="update-grid">
+    <div class="update-note note-purple">
+      <strong>Giao diện mới — Side Panel.</strong><br>
+      Bấm icon extension trên trang AdMob để mở thanh bên (không còn popup nhỏ). Có 3 tab: <strong>Actions</strong>, <strong>Cấu hình</strong>, <strong>Logs</strong>.
+    </div>
+    <div class="update-note note-blue">
+      <strong>Thêm MobFlow.</strong><br>
+      Tạo Ad Unit theo Sheet MobFlow (<strong>Run &amp; Fill</strong> / <strong>Run</strong>) và chỉnh floor theo quốc gia (<strong>Setup Manual</strong>).
+    </div>
+    <div class="update-note note-green">
+      <strong>Thêm Setup Biddings.</strong><br>
+      Tab Cấu hình → <strong>Biddings</strong>: tải Sheet Meta/Pangle/Mintegral, chọn network, chạy automation trên trang Bidding sources của AdMob.
+    </div>
+    <div class="update-note note-amber">
+      <strong>Cấu hình tách theo mục đích.</strong><br>
+      Tab Cấu hình có 4 mục con: <strong>Ad Units</strong> (MobFlow), <strong>Mediation</strong> (Monet), <strong>Biddings</strong>, <strong>Auth</strong> (dùng chung).
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════ MỞ EXTENSION ═══════════ -->
+<section id="open">
+<h2>Mở extension &amp; chuẩn bị</h2>
+
+<ol class="step-list">
+  <li>Mở Chrome, đăng nhập đúng tài khoản Google có app trên AdMob.</li>
+  <li>Vào trang AdMob: <code>https://admob.google.com</code></li>
+  <li>Bấm icon <strong>Monet Waterfall</strong> trên thanh công cụ Chrome → thanh bên (Side Panel) hiện ra.</li>
+  <li>Nếu chưa kích hoạt License Key → nhập key trước (xem mục 1).</li>
+  <li>Vào tab <strong>Cấu hình</strong>, điền thông tin app và Sheet, bấm <strong>Tải dữ liệu</strong>.</li>
+  <li>Quay lại tab <strong>Actions</strong> để chạy tính năng cần dùng.</li>
+</ol>
+
+<div class="alert alert-warning">
+  <strong>Trong lúc tool đang chạy:</strong> không tắt tab AdMob, không chuyển sang app khác trên AdMob. Nếu cần dừng → bấm nút <strong>Dừng</strong> trên thanh trạng thái.
+</div>
+</section>
+
+<!-- ═══════════ 1. ĐĂNG NHẬP ═══════════ -->
 <section id="login">
 <h2>1. Đăng nhập</h2>
 
-<p>Tool sử dụng <strong>License Key</strong> để kích hoạt. Khi mở extension lần đầu, bạn sẽ thấy màn hình nhập License Key.</p>
+<p>Tool dùng <strong>License Key</strong> để kích hoạt. Lần đầu mở extension sẽ thấy màn hình nhập key.</p>
 
 <div class="alert alert-info">
   <strong>Chưa có License Key?</strong><br>
-  Liên hệ admin để được cấp License Key. Mỗi key có giới hạn số thiết bị và thời hạn sử dụng.<br><br>
+  Liên hệ admin để được cấp. Mỗi key có giới hạn số thiết bị và thời hạn sử dụng.<br><br>
   <strong>Admin:</strong><br>
   • SĐT/Zalo: <a href="tel:0988761539">0988761539</a><br>
   • Facebook: <a href="https://www.facebook.com/info.Profile.TuanVu" target="_blank" rel="noopener">facebook.com/info.Profile.TuanVu</a>
@@ -78,241 +188,427 @@
 
 <h3>Cách đăng nhập</h3>
 <ol>
-  <li>Nhập <strong>License Key</strong> được cấp vào ô "License Key"</li>
-  <li>Nhấn nút <strong>"Kích hoạt"</strong></li>
-  <li>Nếu đúng → màn hình login biến mất, hiện giao diện chính (3 tab)</li>
-  <li>Nếu sai → hiện thông báo lỗi (key không hợp lệ, đã hết hạn, đã đạt giới hạn người dùng...)</li>
+  <li>Nhập <strong>License Key</strong> vào ô tương ứng</li>
+  <li>Bấm <strong>Kích hoạt</strong></li>
+  <li>Đúng key → vào giao diện chính. Sai → hiện lỗi (key không hợp lệ, hết hạn, quá số thiết bị…)</li>
 </ol>
 
-<p>Phiên đăng nhập được lưu tự động. Lần sau mở extension sẽ vào thẳng mà không cần nhập lại. Xem thời hạn: tab <strong>"Cấu hình"</strong> → dòng "Phiên đăng nhập".</p>
-
-<p>Muốn đổi key hoặc hủy kích hoạt: tab <strong>"Cấu hình"</strong> → nút <strong>"Hủy kích hoạt"</strong>.</p>
+<p>Phiên đăng nhập được lưu tự động. Xem thời hạn: tab <strong>Cấu hình</strong> → <strong>Auth</strong> → dòng <strong>Phiên đăng nhập</strong>.</p>
+<p>Muốn đổi key: tab <strong>Cấu hình</strong> → <strong>Auth</strong> → <strong>Hủy kích hoạt</strong>.</p>
 </section>
 
-<!-- ═══════════ 2. CẤU HÌNH ĐỂ SỬ DỤNG ═══════════ -->
-<section id="config">
-<h2>2. Cấu hình sau khi đăng nhập</h2>
+<!-- ═══════════ 2. GIAO DIỆN ═══════════ -->
+<section id="ui">
+<h2>2. Giao diện tổng quan</h2>
 
-<p>Chuyển sang tab <strong>"Cấu hình"</strong> để thiết lập trước khi chạy automation. Các field tự động lưu khi thay đổi.</p>
+<h3>Phần đầu màn hình</h3>
+<ul>
+  <li><strong>App đang chọn</strong> — hiển thị tên app và App ID. Bấm vào để chuyển sang tab Cấu hình.</li>
+  <li><strong>Thanh trạng thái</strong> — cho biết tool đang làm gì (Sẵn sàng / Đang chạy…). Có nút <strong>Dừng</strong> khi automation đang chạy.</li>
+</ul>
 
-<div class="alert alert-danger">
-  <strong>Lưu ý bắt buộc — chọn đúng ngữ cảnh mediation:</strong><br>
-  Trên tab <strong>Cấu hình</strong>, mọi thông tin (App ID, Tên ứng dụng, Link / Tên Sheet; khi dùng nhiều app thì <strong>Chọn App đã lưu</strong> + <strong>Tải App</strong>) phải <strong>trùng đúng app và đúng nhóm mediation</strong> mà bạn định Setup Mediation. Cột <strong>MediationGroup</strong> trong Google Sheet phải khớp tên nhóm mediation trên AdMob cho từng dòng.<br>
-  <strong style="color:#b91c1c;">Nếu chọn sai profile / sai sheet / sai tên nhóm mediation</strong> (ví dụ tải nhầm app đã lưu, sheet của app khác, hoặc tên group không khớp AdMob) → tool vẫn có thể chạy nhưng <strong>thường gây lỗi hoặc kẹt ở bước Bidding (Step 6)</strong> khi Setup Mediation, vì danh sách nguồn bidding và ngữ cảnh trang không khớp nhóm thật. <strong>Hãy kiểm tra kỹ trước khi bấm automation.</strong>
-</div>
-
+<h3>3 tab chính</h3>
 <table>
-  <thead><tr><th>Trường</th><th>Mô tả</th></tr></thead>
+  <thead><tr><th>Tab</th><th>Dùng để làm gì</th></tr></thead>
   <tbody>
     <tr>
-      <td><strong>Ngôn ngữ / Language</strong></td>
-      <td>
-        <strong>3 lựa chọn:</strong><br>
-        • <strong>Default (Mixed)</strong> – Logic mặc định (như trước khi có translator). Automation dùng tiếng Anh, giao diện extension hiển thị Việt + Anh lẫn lộn. AdMob mở bằng tiếng Anh. Khuyến nghị nếu bạn đã dùng tool từ trước.<br>
-        • <strong>English</strong> – Toàn bộ tiếng Anh (extension + automation). AdMob tiếng Anh.<br>
-        • <strong>Vietnam</strong> – Toàn bộ tiếng Việt (extension + automation). Dùng khi AdMob hiển thị tiếng Việt.<br>
-        <em>Ngôn ngữ phải khớp với giao diện AdMob để automation tìm đúng nút (Save/Lưu, App/Ứng dụng...). Sai ngôn ngữ → dễ timeout hoặc lỗi.</em>
-      </td>
+      <td><strong>Actions</strong></td>
+      <td>Chạy các tính năng: Setup Ad Unit, Setup Mediation, A/B Test… Xem bảng dữ liệu Waterfall hoặc Biddings.</td>
     </tr>
     <tr>
-      <td><strong>Link Google Sheet</strong></td>
-      <td>URL đầy đủ của Google Sheet chứa dữ liệu ad units. Sheet phải <strong>chia sẻ công khai</strong> (Anyone with the link can view).</td>
+      <td><strong>Cấu hình</strong></td>
+      <td>Điền Link Sheet, App ID, tùy chọn bidding/waterfall… và bấm <strong>Tải dữ liệu</strong>.</td>
     </tr>
     <tr>
-      <td><strong>Tên Sheet</strong></td>
-      <td>Tên chính xác của sheet tab (tab ở dưới cùng Google Sheets). Phải khớp 100%.</td>
-    </tr>
-    <tr>
-      <td><strong>App ID</strong></td>
-      <td>App ID từ AdMob (copy từ trang app trên AdMob).</td>
-    </tr>
-    <tr>
-      <td><strong>Ngày tháng (MMDD)</strong></td>
-      <td>4 chữ số: tháng + ngày. VD: <code>0115</code> = 15/1, <code>1225</code> = 25/12. Mặc định = ngày hôm nay. <strong>Có thể nhập ngày cũ</strong> (vd: <code>0301</code>) để tìm và sử dụng ad unit đã tạo trước đó khi setup mediation. Giá trị được lưu tự động.</td>
-    </tr>
-    <tr>
-      <td><strong>Tên Ứng dụng</strong></td>
-      <td>Tên app hiển thị trên AdMob. Phải khớp chính xác với tên trên AdMob.</td>
-    </tr>
-    <tr>
-      <td><strong>Nhóm mediation (Sheet + Cấu hình)</strong></td>
-      <td><span style="color:#b91c1c;font-weight:600;">Bắt buộc khớp ngữ cảnh:</span> các dòng trên Google Sheet phải có cột <strong>MediationGroup</strong> đúng tên nhóm trên AdMob; đồng thời App ID / Tên app / sheet đang dùng phải là của <strong>đúng ứng dụng</strong> đó. Khi dùng Multi-app: chọn đúng mục <strong>Chọn App đã lưu</strong> rồi <strong>Tải App</strong> trước khi Fetch và chạy Setup Mediation. <span style="color:#b91c1c;font-weight:600;">Chọn sai → dễ lỗi ở bước Bidding (Step 6).</span></td>
-    </tr>
-    <tr>
-      <td><strong>Tài khoản Google (0, 1, 2...)</strong></td>
-      <td>Xem hướng dẫn chi tiết bên dưới ↓</td>
-    </tr>
-    <tr>
-      <td><strong>Sử dụng Waterfall</strong></td>
-      <td>Tick = map waterfall sau khi tạo ad units. Bỏ tick = chỉ tạo ad units.</td>
-    </tr>
-    <tr>
-      <td><strong>Mạng lưới</strong></td>
-      <td>Chọn mạng waterfall: AdMob, Meta, IronSource, Applovin.</td>
-    </tr>
-    <tr>
-      <td><strong>Bỏ qua Bidding</strong></td>
-      <td>Tick = bỏ qua Step 6 Bidding khi Setup Mediation (chỉ setup Waterfall).</td>
-    </tr>
-    <tr>
-      <td><strong>Bidding ad sources</strong></td>
-      <td>Tích checkbox bên trái mỗi nguồn bidding muốn thêm. Có thể dùng "Chọn tất cả (Select all)" để tick/bỏ tick tất cả. Để trống (không tick nguồn nào) = không thêm nguồn bidding khi Setup Mediation.</td>
-    </tr>
-    <tr>
-      <td><strong>Ghi màn hình khi chạy</strong></td>
-      <td>Tick = tự động ghi video khi chạy automation.</td>
-    </tr>
-    <tr>
-      <td><strong>Chế độ mở</strong></td>
-      <td><strong>Tab hiện tại</strong> = thao tác trên tab đang mở. <strong>Cửa sổ mới</strong> = mở cửa sổ riêng 1200x1200.</td>
+      <td><strong>Logs</strong></td>
+      <td>Xem nhật ký chi tiết khi chạy tool — hữu ích khi gặp lỗi hoặc cần báo admin.</td>
     </tr>
   </tbody>
 </table>
 
+<h3>Tab Cấu hình — 4 mục con</h3>
+<table>
+  <thead><tr><th>Mục</th><th>Phục vụ</th></tr></thead>
+  <tbody>
+    <tr><td><span class="badge badge-mob">MobFlow</span> <strong>Ad Units</strong></td><td>Sheet &amp; cấu hình tạo Ad Unit (MobFlow)</td></tr>
+    <tr><td><span class="badge badge-mon">Monet</span> <strong>Mediation</strong></td><td>Sheet &amp; cấu hình mediation/waterfall/bidding</td></tr>
+    <tr><td><span class="badge badge-mon">Monet</span> <strong>Biddings</strong></td><td>Sheet &amp; cấu hình Meta / Mintegral / Pangle</td></tr>
+    <tr><td><strong>Auth</strong></td><td>Ngôn ngữ, lưu/tải app, Android/iOS, phiên đăng nhập</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ═══════════ 3. AUTH & CHUNG ═══════════ -->
+<section id="auth">
+<h2>3. Cấu hình chung (Auth)</h2>
+<p>Vào tab <strong>Cấu hình</strong> → <strong>Auth</strong>. Các mục quan trọng:</p>
+
+<table>
+  <thead><tr><th>Mục</th><th>Giải thích đơn giản</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Ngôn ngữ / Language</strong></td>
+      <td>
+        Chọn ngôn ngữ khớp với giao diện AdMob bạn đang dùng:<br>
+        • <strong>Default (Mixed)</strong> — automation dùng tiếng Anh trên AdMob (khuyến nghị nếu AdMob tiếng Anh).<br>
+        • <strong>English</strong> — toàn bộ tiếng Anh.<br>
+        • <strong>Vietnam</strong> — dùng khi AdMob hiển thị tiếng Việt.<br>
+        <em>Sai ngôn ngữ → tool không tìm được nút Save/Lưu → dễ bị treo hoặc lỗi.</em>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Chọn App đã lưu</strong></td>
+      <td>Dropdown chọn app đã lưu trước đó. Bấm nút <strong>Tải</strong> (icon mũi tên lên) để điền lại toàn bộ thông tin.</td>
+    </tr>
+    <tr>
+      <td><strong>Lưu App</strong></td>
+      <td>Lưu cấu hình Monet hiện tại (App ID, Sheet, waterfall, bidding, Android/iOS…) để lần sau chọn nhanh.</td>
+    </tr>
+    <tr>
+      <td><strong>Android / iOS</strong></td>
+      <td>Chọn nền tảng khi tool <strong>tạo mediation group mới</strong>. Mặc định Android. Nếu group đã có sẵn trên AdMob thì tool không đổi platform.</td>
+    </tr>
+    <tr>
+      <td><strong>Tài khoản Google (0, 1, 2…)</strong></td>
+      <td>Chọn Gmail thứ mấy trong Chrome (0 = tài khoản đầu tiên). Xem hướng dẫn chi tiết ở cuối mục 5.</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ═══════════ 4. MOBFLOW ═══════════ -->
+<section id="mobflow">
+<h2>4. MobFlow — Tạo Ad Unit</h2>
+
 <div class="alert alert-danger">
-  <strong>Không được đặt tên sheet trùng tên với StandardNames trong sheet.</strong><br>
-  Tên tab Google Sheets (ô <strong>Tên Sheet</strong> trong extension) không được trùng với bất kỳ giá trị nào trong cột <strong>StandardNames</strong> của dữ liệu — nếu trùng, tool có thể không hoạt động đúng khi tải sheet hoặc chọn ad unit.
+  <strong>Sheet MobFlow khác Sheet Monet!</strong> MobFlow dùng cột Ad type / Ad name / Ad / Ad ID. Monet dùng Format / Placement / Price… Hai Sheet có thể cùng file Google Sheets nhưng <strong>tab (tên sheet) và cột khác nhau</strong>.
 </div>
 
-<h3>Chuẩn bị Google Sheet</h3>
-<p>Sheet cần <strong>6 cột</strong> (A→F): Format, Placement, Price, StandardNames, MediationGroup, Countries. Dữ liệu từ hàng 2, hàng 1 là header.</p>
-<p><strong>Cột Price:</strong> Nhập số (vd: 3.50) = Manual eCPM floor. Nhập <code>disabled</code> = eCPM Floor chọn "Disabled" (ad unit vẫn tạo, tên có hậu tố <code>_disabled</code>, khi add vào mediation dùng $0.01). Nhập <code>off</code> = bỏ qua cấu hình eCPM.</p>
+<h3>4.1. Cấu hình Ad Units (tab Cấu hình → Ad Units)</h3>
+<table>
+  <thead><tr><th>Trường</th><th>Mô tả</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Link Google Sheet</strong></td><td>URL Sheet chia sẻ công khai.</td></tr>
+    <tr><td><strong>Tên Sheet</strong></td><td>Tên tab chính xác (ví dụ <code>Sheet1</code>).</td></tr>
+    <tr><td><strong>Tên Ứng dụng</strong></td><td>Tên app trên AdMob — phải khớp 100%.</td></tr>
+    <tr><td><strong>Tài khoản Google</strong></td><td>0, 1, 2… theo thứ tự Gmail trên Chrome.</td></tr>
+    <tr><td><strong>Ngôn ngữ</strong></td><td>Giống mục Auth — khớp AdMob.</td></tr>
+    <tr>
+      <td><strong>eCPM Floor Mode</strong></td>
+      <td>
+        • <strong>Google optimized</strong> (mặc định) — AdMob tự tối ưu giá sàn.<br>
+        • <strong>Disabled</strong> — tắt eCPM floor khi tạo ad unit.<br>
+        Chi tiết loại floor (High / Medium / All prices…) lấy từ cột <strong>Ad</strong> trong Sheet (xem bảng bên dưới).
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<h3>Quy trình sử dụng</h3>
-<ol>
-  <li>Điền đầy đủ config (Ngôn ngữ, Link Sheet, Tên Sheet, App ID, Tên Ứng dụng...). Chọn <strong>Ngôn ngữ</strong> phù hợp: Default (Mixed) = logic cũ ổn định; English/Vietnam = khớp với giao diện AdMob đang dùng.</li>
-  <li>Nhấn <strong>"Tải dữ liệu"</strong> để fetch dữ liệu từ Google Sheet</li>
-  <li>Vào tab <strong>"Tự động hóa"</strong> → chọn nút cần chạy:
-    <ul>
-      <li><strong>Thiết lập AdUnit & Waterfall</strong> – Tạo ad units + map waterfall. Khi Add mapping (Manage Mapping), tool điền Mapping name, Network eCPM (từ cột Price), Ad Unit ID.</li>
-      <li><strong>Thiết lập Mediation</strong> – Tạo/sửa mediation groups (chạy sau bước 1). Nếu gặp lỗi trùng tên/ID (Lỗi 7.1), tool tự động skip ad unit đó và tiếp tục các ad unit còn lại.</li>
-      <li><strong>Xóa AdUnit không sử dụng</strong> – Xóa mapping không dùng</li>
-      <li><strong>Map Fallback AdUnit</strong> – Map ad unit fallback vào nhiều ad units</li>
-      <li><strong>A/B Test Setup</strong> – Thiết lập A/B Test cho mediation</li>
-    </ul>
-  </li>
+<h4>Cấu trúc Google Sheet (MobFlow)</h4>
+<p>Tool tự nhận header. Thường gặp layout 6 cột:</p>
+<p><code>No.</code> | <code>Description</code> | <code>Ad type</code> | <code>Ad name</code> | <code>Ad</code> | <code>Ad ID</code></p>
+<p>Hoặc layout gọn 4 cột: <code>Ad type</code> | <code>Ad name</code> | <code>Ad</code> | <code>Ad ID</code></p>
+
+<p><strong>Cột Ad</strong> — mã vị trí quảng cáo, quyết định loại floor khi tạo:</p>
+<table>
+  <thead><tr><th>Ví dụ cột Ad</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td><code>app_open_hf</code></td><td>High floor</td></tr>
+    <tr><td><code>app_open_mf</code></td><td>Medium floor (Average)</td></tr>
+    <tr><td><code>inter_all_manual</code></td><td>Manual floor</td></tr>
+    <tr><td><code>native_language</code></td><td>All prices</td></tr>
+    <tr><td>có chữ <code>disabled</code></td><td>Tắt floor</td></tr>
+  </tbody>
+</table>
+
+<p>Sau khi điền xong → bấm <strong>Tải dữ liệu</strong>. Tool tự mở màn Setup Ad Unit nếu tải thành công.</p>
+
+<h3>4.2. Setup Ad Unit (tab Actions → Setup Ad Unit)</h3>
+<p>Mở màn hình con bằng cách bấm nút <strong>Setup Ad Unit</strong> trên tab Actions.</p>
+
+<table>
+  <thead><tr><th>Nút</th><th>Làm gì</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Run &amp; Fill</strong></td>
+      <td>Tạo ad unit trên AdMob <strong>và</strong> ghi Ad ID ngược vào Google Sheet (cần mở tab Sheet hoặc tool tự ghi qua API).</td>
+    </tr>
+    <tr>
+      <td><strong>Run</strong></td>
+      <td>Chỉ tạo trên AdMob, cập nhật bảng trong tool — <strong>không</strong> ghi Sheet.</td>
+    </tr>
+    <tr>
+      <td><strong>Copy</strong> (icon)</td>
+      <td>Sao chép bảng Ad ID ra clipboard.</td>
+    </tr>
+    <tr>
+      <td><strong>Dừng</strong></td>
+      <td>Dừng automation đang chạy.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="flow-box">
+  <strong>Quy trình gợi ý:</strong> Cấu hình → Tải dữ liệu → Setup Ad Unit → Run &amp; Fill → kiểm tra Sheet đã có Ad ID.
+</div>
+
+<h3>4.3. Setup Manual Floor (tab Actions → Setup Manual)</h3>
+<p>Dùng khi ad unit <strong>đã tạo sẵn</strong> và bạn muốn chỉnh giá sàn (eCPM) theo từng quốc gia — không cần Google Sheet (dữ liệu lưu trong extension).</p>
+
+<ol class="step-list">
+  <li>Bấm <strong>Setup Manual</strong> trên tab Actions.</li>
+  <li>Điền <strong>App Name</strong> và <strong>App ID</strong> ở đầu màn hình.</li>
+  <li>Nhập hoặc thêm dòng vào bảng: <strong>Ad Name</strong>, <strong>Type</strong>, <strong>Country</strong>, <strong>Cost</strong>.</li>
+  <li><em>Tùy chọn:</em> Bấm <strong>Fetch</strong> để tool đọc floor hiện có từ AdMob và điền vào bảng (nhập Ad Name trước).</li>
+  <li>Bấm <strong>Setup</strong> để tool áp dụng giá lên AdMob.</li>
 </ol>
 
-<div class="alert alert-success">
-  <strong>Lưu ý:</strong> Extension chỉ hoạt động khi đang ở trang AdMob (<code>admob.google.com</code> hoặc <code>apps.admob.com</code>). Mở Side Panel từ trang AdMob.
+<div class="alert alert-info">
+  <strong>Gợi ý Country:</strong> Có thể gõ tên đầy đủ (<code>Vietnam</code>) hoặc mã ngắn (<code>vn</code>, <code>us</code>). Tool tự chuẩn hóa tên quốc gia AdMob.<br>
+  Dòng bị lỗi sẽ được tô đỏ trong bảng sau khi chạy.
 </div>
+</section>
+
+<!-- ═══════════ 5. MONET MEDIATION ═══════════ -->
+<section id="monet-mediation">
+<h2>5. Monet — Mediation &amp; Waterfall</h2>
+
+<div class="alert alert-danger">
+  <strong>Bắt buộc khớp đúng app và nhóm mediation:</strong><br>
+  App ID, Tên app, Link Sheet và cột <strong>MediationGroup</strong> trong Sheet phải trùng với AdMob. Chọn sai app / sai sheet → tool vẫn có thể chạy nhưng <strong>dễ lỗi ở bước Bidding</strong>. Luôn kiểm tra trước khi bấm automation.
+</div>
+
+<h3>5.1. Cấu hình Mediation (tab Cấu hình → Mediation)</h3>
+<table>
+  <thead><tr><th>Trường</th><th>Mô tả</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Link Google Sheet</strong></td><td>URL Sheet Monet (chia sẻ công khai).</td></tr>
+    <tr><td><strong>Tên Sheet</strong></td><td>Tên tab — <strong>không được trùng</strong> bất kỳ giá trị nào trong cột StandardNames.</td></tr>
+    <tr><td><strong>App ID</strong></td><td>App ID từ AdMob (dạng <code>ca-app-pub-xxx~yyy</code>).</td></tr>
+    <tr><td><strong>Ngày tháng (MMDD)</strong></td><td>4 chữ số tháng+ngày. VD: <code>0702</code> = 2/7. Mặc định hôm nay. Có thể nhập ngày cũ để tìm ad unit đã tạo trước.</td></tr>
+    <tr><td><strong>Tên Ứng dụng</strong></td><td>Khớp chính xác tên trên AdMob.</td></tr>
+    <tr><td><strong>Tài khoản Google</strong></td><td>0, 1, 2…</td></tr>
+    <tr>
+      <td><strong>Sử dụng Waterfall</strong></td>
+      <td>Tick = sau khi tạo ad unit sẽ map waterfall. Bỏ tick = chỉ tạo ad unit.</td>
+    </tr>
+    <tr><td><strong>Mạng lưới</strong></td><td>AdMob, Meta, IronSource hoặc Applovin — dùng khi map waterfall.</td></tr>
+    <tr>
+      <td><strong>Skip mapping country</strong></td>
+      <td>Tick = <strong>không</strong> đổi country targeting khi tạo/sửa mediation group. Dùng khi muốn giữ cấu hình quốc gia hiện có.</td>
+    </tr>
+    <tr>
+      <td><strong>Bỏ qua Bidding</strong></td>
+      <td>Tick = bỏ qua bước thêm nguồn bidding, chỉ setup waterfall.</td>
+    </tr>
+    <tr>
+      <td><strong>Bidding ad sources</strong></td>
+      <td>Tích các nguồn bidding muốn thêm vào mediation (Meta, Pangle, ironSource…). Không tích nguồn nào = không thêm bidding. Có nút <strong>Chọn tất cả</strong>.</td>
+    </tr>
+    <tr>
+      <td><strong>Chế độ mở</strong></td>
+      <td><strong>Tab hiện tại</strong> — dùng tab AdMob đang mở. <strong>Cửa sổ mới</strong> — mở cửa sổ riêng 1200×1200.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Cấu trúc Google Sheet (Monet) — 6 cột</h4>
+<p>Từ hàng 2 (hàng 1 là tiêu đề):</p>
+<p><code>Format</code> | <code>Placement</code> | <code>Price</code> | <code>StandardNames</code> | <code>MediationGroup</code> | <code>Countries</code></p>
+
+<p><strong>Cột Price:</strong></p>
+<ul>
+  <li>Số (vd: <code>3.50</code>) → Manual eCPM floor</li>
+  <li><code>disabled</code> → tắt floor, tên ad unit có hậu tố <code>_disabled</code>, mediation dùng $0.01</li>
+  <li><code>off</code> → bỏ qua cấu hình eCPM</li>
+</ul>
+
+<p>Sau khi điền → bấm <strong>Tải dữ liệu</strong>. Bảng <strong>Dữ liệu Waterfall</strong> trên tab Actions sẽ hiện các dòng đã tải.</p>
+
+<h3>5.2. Setup AdUnit (Monet)</h3>
+<p>Nút <strong>Setup AdUnit</strong> trên tab Actions (phần Mediation &amp; Waterfall).</p>
+<ul>
+  <li>Quét ad unit đã có → tạo ad unit còn thiếu theo Sheet</li>
+  <li>Nếu tick <strong>Sử dụng Waterfall</strong> → map waterfall sau khi tạo</li>
+  <li>Các dòng trùng Format + Placement + ngày + Price sẽ đồng bộ cùng Ad Unit ID</li>
+</ul>
+
+<div class="flow-box">
+  <strong>Thứ tự thường dùng:</strong> Tải Sheet Monet → Setup AdUnit (Monet) → Setup Mediation
+</div>
+
+<h3>5.3. Setup Mediation</h3>
+<p>Tạo hoặc sửa nhóm mediation theo Sheet. Tool tự:</p>
+<ol>
+  <li>Quét group đã có trên AdMob</li>
+  <li>Tạo group mới (chọn Android/iOS theo Auth) hoặc mở group có sẵn để sửa</li>
+  <li>Map ad units, country (trừ khi tick Skip mapping country)</li>
+  <li>Thêm bidding sources đã chọn (trừ khi tick Bỏ qua Bidding)</li>
+  <li>Map waterfall theo cấu hình</li>
+</ol>
+
+<div class="alert alert-info">
+  <strong>Lỗi trùng tên / trùng ID (Lỗi 7.1):</strong> Tool tự bỏ qua ad unit bị trùng và tiếp tục các dòng còn lại — không dừng cả group.
+</div>
+
+<h3>5.4. A/B Test Setup</h3>
+<p>Bấm <strong>A/B Test</strong> → chọn chế độ → <strong>Start Test</strong>.</p>
+
+<div class="alert alert-info">
+  <strong>Trước khi chạy:</strong> Đã tải Sheet Monet và chạy <strong>Setup AdUnit</strong>. Tên app khớp AdMob. Đã đăng nhập AdMob.
+</div>
+
+<p><strong>2 chế độ:</strong></p>
+<ul>
+  <li><strong>Auto AB Test</strong> — tool tự bấm Start Test sau khi map Variant B</li>
+  <li><strong>Manual AB Test</strong> — tool chỉ Save, bạn tự Start Test trên AdMob</li>
+</ul>
+
+<p><strong>Tool sẽ làm gì (tóm tắt):</strong></p>
+<ol>
+  <li>Setup mediation cho group chưa có (giống Setup Mediation) → Save</li>
+  <li>Bấm <strong>Set up A/B test</strong> trên AdMob</li>
+  <li>Map waterfall vào <strong>Variant B</strong> theo Sheet</li>
+  <li>Auto: Start Test / Manual: Save → chuyển sang group tiếp theo</li>
+</ol>
+
+<p>Nếu tick <strong>Bỏ qua Bidding</strong> và mọi group đã có trên AdMob, tool vào thẳng bước A/B (không tạo/sửa mediation lại).</p>
 
 <div class="card" style="border-left:4px solid #059669;">
-  <h3 style="margin-top:0;">📌 Tài khoản Google (0, 1, 2...) – Hướng dẫn chi tiết</h3>
-  
-  <p><strong>Tác dụng:</strong> Chọn <strong>tài khoản AdMob</strong> (Gmail nào) để tool thao tác. Mỗi Gmail có AdMob riêng – nếu bạn dùng nhiều Gmail, phải chọn đúng Gmail có app cần setup.</p>
-  
-  <p><strong>Bước 1 – Kiểm tra bạn có mấy tài khoản:</strong></p>
+  <h3 style="margin-top:0;">Tài khoản Google (0, 1, 2…) — Hướng dẫn chi tiết</h3>
+  <p><strong>Tác dụng:</strong> Chọn đúng Gmail có app AdMob cần setup.</p>
+  <p><strong>Cách xác định số:</strong></p>
   <ol>
-    <li>Mở Chrome, nhìn góc <strong>phải trên</strong> màn hình</li>
-    <li>Thấy icon <strong>hình tròn (avatar)</strong> hoặc chữ cái (vd: T, M) → click vào</li>
-    <li>Một menu hiện ra liệt kê các tài khoản Google đã đăng nhập</li>
+    <li>Click avatar Google góc phải trên Chrome</li>
+    <li>Tài khoản <strong>trên cùng</strong> = <code>0</code>, thứ hai = <code>1</code>, thứ ba = <code>2</code>…</li>
+    <li>Chỉ có 1 tài khoản → luôn gõ <code>0</code></li>
   </ol>
-  
-  <p><strong>Bước 2 – Đếm thứ tự tài khoản AdMob của bạn:</strong></p>
-  <ul>
-    <li>Tài khoản <strong>đầu tiên</strong> (trên cùng) trong danh sách → gõ số <code>0</code></li>
-    <li>Tài khoản <strong>thứ hai</strong> → gõ số <code>1</code></li>
-    <li>Tài khoản <strong>thứ ba</strong> → gõ số <code>2</code></li>
-    <li>Cứ thế: thứ tư = <code>3</code>, thứ năm = <code>4</code>...</li>
-  </ul>
-  
-  <p><strong>Bước 3 – Điền vào tool:</strong></p>
-  <p>Vào tab <strong>Cấu hình</strong> → ô <strong>"Tài khoản Google"</strong> → nhập đúng số (0, 1, 2...) theo thứ tự tài khoản AdMob của bạn.</p>
-  
-  <p><strong>Ví dụ:</strong> Bạn có 3 tài khoản Gmail. Tài khoản dùng AdMob là tài khoản thứ 2 trong danh sách → gõ <code>1</code>.</p>
-  
-  <p><strong>Chỉ có 1 tài khoản Google?</strong> → Gõ <code>0</code> (luôn luôn là 0).</p>
+  <p><strong>Ví dụ:</strong> AdMob nằm ở Gmail thứ 2 trong danh sách → gõ <code>1</code>.</p>
 </div>
 </section>
 
-<!-- ═══════════ 3. QUẢN LÝ NHIỀU APP ═══════════ -->
+<!-- ═══════════ 6. BIDDINGS ═══════════ -->
+<section id="biddings">
+<h2>6. Setup Biddings</h2>
+
+<p>Tính năng cấu hình nguồn bidding <strong>Meta</strong>, <strong>Mintegral</strong>, <strong>Pangle</strong> trên trang Bidding sources của AdMob — dùng Sheet riêng, tách khỏi Sheet Mediation.</p>
+
+<h3>6.1. Cấu hình (tab Cấu hình → Biddings)</h3>
+<table>
+  <thead><tr><th>Trường</th><th>Mô tả</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Link Google Sheet</strong></td><td>Sheet chứa 3 section META / PANGLE / MINTEGRAL (có thể nằm ngang trên cùng một tab).</td></tr>
+    <tr><td><strong>Tên Sheet</strong></td><td>Tên tab chính xác.</td></tr>
+    <tr><td><strong>App ID / Tên Ứng dụng</strong></td><td>Thông tin app trên AdMob.</td></tr>
+    <tr><td><strong>Tài khoản Google</strong></td><td>0, 1, 2…</td></tr>
+    <tr><td><strong>Chế độ mở</strong></td><td>Tab hiện tại hoặc cửa sổ mới.</td></tr>
+    <tr>
+      <td><strong>Bidding ad sources</strong></td>
+      <td>Tích Meta, Mintegral, Pangle muốn setup. <strong>Thứ tự tích = thứ tự chạy.</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Bấm <strong>Tải dữ liệu</strong> → quay tab Actions, bảng bidding hiện dạng thẻ theo từng network.</p>
+
+<h3>6.2. Chạy Setup Biddings</h3>
+<ol class="step-list">
+  <li>Tải dữ liệu Biddings xong (tab Cấu hình → Biddings).</li>
+  <li>Chọn ít nhất 1 network (Meta / Mintegral / Pangle).</li>
+  <li>Trên tab Actions, bấm <strong>Setup Biddings</strong> (nút chỉ bật khi đã tải dữ liệu Biddings).</li>
+  <li>Tool mở trang Bidding sources trên AdMob và tự điền theo Sheet.</li>
+</ol>
+
+<div class="alert alert-warning">
+  Khi đang xem dữ liệu Biddings, các nút Mediation (Setup AdUnit, Setup Mediation, A/B Test) tạm bị tắt — và ngược lại. Đây là bình thường: mỗi lần chỉ nên chạy một loại automation.
+</div>
+</section>
+
+<!-- ═══════════ 7. MULTI-APP ═══════════ -->
 <section id="multi-app">
-<h2>3. Quản lý nhiều App (Multi-app)</h2>
+<h2>7. Quản lý nhiều App</h2>
 
-<p>Monet Waterfall cho phép lưu thông tin nhiều app để chuyển đổi dễ dàng mà không cần nhập lại.</p>
+<p>Lưu cấu hình Monet để chuyển app nhanh — không cần gõ lại mỗi lần.</p>
 
-<h3>Cách lưu app:</h3>
+<h3>Lưu app mới</h3>
 <ol>
-  <li>Nhập thông tin app vào các ô trong tab <strong>Cấu hình</strong> (App ID, App Name, Link Sheet, Tên Sheet...)</li>
-  <li>Click nút <strong>"Lưu App"</strong> để lưu lại</li>
+  <li>Điền đủ thông tin tab <strong>Cấu hình → Mediation</strong> (và các tùy chọn ở Auth: Android/iOS, bidding…)</li>
+  <li>Tab <strong>Auth</strong> → bấm <strong>Lưu App</strong></li>
 </ol>
 
-<h3>Cách chuyển app:</h3>
+<h3>Chuyển sang app khác</h3>
 <ol>
-  <li>Chọn app đã lưu từ dropdown <strong>"Chọn App đã lưu"</strong></li>
-  <li>Click nút <strong>"Tải App"</strong> để tải thông tin app đã chọn</li>
-  <li>Thông tin sẽ tự động điền vào các ô tương ứng</li>
+  <li>Tab <strong>Auth</strong> → chọn app trong dropdown <strong>Chọn App đã lưu</strong></li>
+  <li>Bấm nút <strong>Tải</strong> (icon upload)</li>
+  <li>Kiểm tra App ID, Sheet, ngày MMDD đã đúng → Tải dữ liệu lại trước khi chạy automation</li>
 </ol>
-<p style="color:#b91c1c;font-weight:600;margin-top:12px;border-left:4px solid #dc2626;padding:10px 12px;background:#fef2f2;border-radius:6px;">Nếu chọn nhầm app ở đây mà vẫn chạy Setup Mediation, tool có thể mở sai ngữ cảnh và <strong>lỗi tại bước Bidding</strong>. Luôn xác nhận đúng app trước khi Fetch / chạy automation.</p>
 
-<h3>Quản lý app:</h3>
+<h3>Xóa / cập nhật app</h3>
 <ul>
-  <li><strong>Xóa app:</strong> Chọn app → Click nút xóa</li>
-  <li><strong>Cập nhật app:</strong> Nhập thông tin mới → Lưu App (sẽ hỏi xác nhận)</li>
+  <li><strong>Xóa:</strong> Chọn app → bấm icon thùng rác</li>
+  <li><strong>Cập nhật:</strong> Sửa thông tin → Lưu App (sẽ hỏi xác nhận nếu App ID đã tồn tại)</li>
 </ul>
-</section>
-
-<!-- ═══════════ 4. MAP FALLBACK ADUNIT ═══════════ -->
-<section id="fallback">
-<h2>4. Map Fallback AdUnit</h2>
-
-<p>Tính năng này cho phép map một ad unit fallback (thường là $99) vào nhiều ad units cùng lúc.</p>
-
-<h3>Cách sử dụng:</h3>
-<ol>
-  <li>Click nút <strong>"Map Fallback AdUnit"</strong> trong tab Tự động hóa</li>
-  <li>Nhập <strong>mức giá fallback</strong> (VD: 99)</li>
-  <li>Chọn <strong>Ad Format</strong> cần map (hoặc để trống để chọn tất cả)</li>
-  <li>Click <strong>"Quét Ad Units"</strong> để quét các ad units từ app</li>
-  <li>Trong bảng hiện ra, <strong>chọn các ad units</strong> cần map fallback (dùng checkbox)</li>
-  <li>Click <strong>"Chọn tất cả"</strong> để chọn nhanh</li>
-  <li>Click <strong>"Map Fallback"</strong> để thực hiện map</li>
-</ol>
 
 <div class="alert alert-info">
-  <strong>Lưu ý:</strong> Ad unit fallback cần được tạo sẵn trong AdMob trước khi map.
+  Lưu app hiện lưu cấu hình <strong>Monet</strong> (Mediation). Cấu hình MobFlow (Ad Units) lưu riêng trong tab Ad Units.
 </div>
 </section>
 
-<!-- ═══════════ 5. A/B TEST SETUP ═══════════ -->
-<section id="abtest">
-<h2>5. A/B Test Setup</h2>
+<!-- ═══════════ 8. LOGS ═══════════ -->
+<section id="logs">
+<h2>8. Tab Logs &amp; xử lý lỗi</h2>
 
-<p>Flow mới: Setup Mediation (giống chức năng Setup Mediation) đến xong Bidding + Waterfall → Save → Set up A/B Test → Map variant B từ sheet → Auto: Start Test | Manual: Save.</p>
+<p>Tab <strong>Logs</strong> ghi lại từng bước tool đang làm. Khi gặp lỗi:</p>
+<ol>
+  <li>Mở tab Logs, đọc dòng cuối cùng (thường ghi rõ bước bị kẹt)</li>
+  <li>Kiểm tra lại: đúng app? đúng Sheet? đúng ngôn ngữ AdMob? đúng số tài khoản Google?</li>
+  <li>Chụp màn hình Logs + màn AdMob → gửi admin nếu cần hỗ trợ</li>
+</ol>
 
-<div class="alert alert-info">
-  <strong>Yêu cầu trước khi chạy:</strong>
-  <ul style="margin:8px 0 0 16px;">
-    <li><strong>Tải dữ liệu Google Sheet</strong> và <strong>Setup AdUnit</strong> xong</li>
-    <li>Tên Ứng dụng trong tab Cấu hình khớp với tên app trên AdMob</li>
-    <li>Đã đăng nhập AdMob trong Chrome</li>
+<table>
+  <thead><tr><th>Triệu chứng</th><th>Thử làm</th></tr></thead>
+  <tbody>
+    <tr><td>Tool không tìm nút Save/Lưu</td><td>Đổi <strong>Ngôn ngữ</strong> cho khớp giao diện AdMob</td></tr>
+    <tr><td>Lỗi ở bước Bidding</td><td>Kiểm tra App ID, tên MediationGroup, app đã lưu có đúng không</td></tr>
+    <tr><td>Sheet không tải được</td><td>Sheet phải chia sẻ <strong>Anyone with the link can view</strong></td></tr>
+    <tr><td>Ad unit không tạo được</td><td>Tên app / App ID sai; hoặc ad unit đã tồn tại trên AdMob</td></tr>
+    <tr><td>Tool treo lâu</td><td>Chờ thêm (một số bước timeout tới 2 phút). Nếu quá lâu → Dừng → kiểm tra Logs → chạy lại</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ═══════════ 9. MẸO ═══════════ -->
+<section id="tips">
+<h2>9. Mẹo quan trọng</h2>
+
+<div class="card">
+  <h4 style="margin-top:0;">MobFlow vs Monet — khi nào dùng cái nào?</h4>
+  <ul>
+    <li><strong>MobFlow Setup Ad Unit</strong> — workflow tạo ad unit + ghi Sheet theo template MobFlow (Ad name, Ad placement…).</li>
+    <li><strong>Monet Setup AdUnit</strong> — workflow mediation: Format, Placement, Price, MediationGroup, Countries.</li>
+    <li>Nhiều team dùng <strong>cả hai</strong>: MobFlow tạo ad unit trước, Monet setup mediation/waterfall sau.</li>
   </ul>
 </div>
 
-<h3>Chế độ:</h3>
-<ul>
-  <li><strong>Auto AB Test:</strong> Tool tự động Start Test sau khi map variant B, chuyển sang mediation group tiếp theo</li>
-  <li><strong>Manual AB Test:</strong> Tool bấm Save, user tự Start Test sau, chuyển sang mediation group tiếp theo</li>
-</ul>
-
-<h3>Cách sử dụng:</h3>
-<ol>
-  <li>Tải dữ liệu từ Google Sheet (nút Fetch trong tab Cấu hình)</li>
-  <li>Chạy <strong>Setup AdUnit</strong> trước</li>
-  <li>Click nút <strong>"A/B Test"</strong> trong tab Tự động hóa</li>
-  <li>Chọn <strong>Auto AB Test</strong> hoặc <strong>Manual AB Test</strong></li>
-  <li>Click <strong>"Start Test"</strong> để bắt đầu</li>
-  <li>Tool sẽ: Setup Mediation (format, geo, ad units, bidding, waterfall) cho từng group → Save → Set up A/B Test → Map waterfall vào Variant B theo sheet → Auto: Start Test / Manual: Save → chuyển group tiếp theo</li>
-</ol>
+<div class="card">
+  <h4 style="margin-top:0;">Checklist trước mỗi lần chạy</h4>
+  <ul>
+    <li>Đúng app trong cấu hình (hoặc đã Tải app đã lưu)</li>
+    <li>Đã bấm Tải dữ liệu và thấy bảng có dòng</li>
+    <li>AdMob mở đúng ngôn ngữ đã chọn trong tool</li>
+    <li>Đúng tài khoản Google (0/1/2…)</li>
+    <li>Không thao tác tay trên AdMob khi tool đang chạy</li>
+  </ul>
+</div>
 
 <div class="alert alert-success">
-  <strong>Flow tích hợp:</strong> A/B Test chạy ngay sau Setup Mediation, không cần chạy riêng.
+  <strong>Thứ tự gợi ý cho setup mediation đầy đủ:</strong><br>
+  1) Tạo ad unit (MobFlow hoặc Monet Setup AdUnit) → 2) Setup Mediation → 3) (Tuỳ chọn) A/B Test hoặc Setup Biddings
 </div>
 </section>
 
 </div>
 
-<footer>Monet Waterfall v1.0.3 — Hướng dẫn sử dụng</footer>
+<footer>Monet Waterfall v1.1.0 — Hướng dẫn sử dụng</footer>
 </body>
 </html>
